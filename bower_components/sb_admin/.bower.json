@@ -1,0 +1,15 @@
+{
+  "description": "Arquivos base da aplicação",
+  "keywords": [
+    "css",
+    "js"
+  ],
+  "main": [
+    "css/sb-admin.css",
+    "css/plugins/morris.css",
+	"font-awesome/css/font-awesome.min.css",
+	"js/plugins/morris/raphael.min.js",
+    "js/plugins/morris/morris.min.js",
+    "js/plugins/morris/morris-data.js"
+  ]
+}

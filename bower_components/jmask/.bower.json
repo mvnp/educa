@@ -1,0 +1,7 @@
+{
+  "name": "jmask",
+  "main": [
+    "jmask.js",
+    "masks.js"  
+  ]
+}

@@ -1,0 +1,37 @@
+.btn {
+    border-radius: 0px;
+    outline: none !important;
+}
+
+.btn-pill {
+    border-radius: 20px;
+    padding: 5px 20px;
+    font-size: 1.2em;
+    transition: 0.25s;
+}
+
+.btn-pill-lg {
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    transition: 0.25s;
+}
+/*__ button pills com fundo transparente */
+.btn-pill-info {
+    border-color: #31b0d5;
+    color: #31b0d5;
+    background: transparent;
+}
+.btn-pill-info:hover {
+    color: #fff;
+    background: #31b0d5;
+}
+.btn-pill-warning {
+    border-color: #f0ad4e;
+    color: #f0ad4e;
+    background: transparent;
+}
+.btn-pill-warning:hover {
+    color: #fff;
+    background: #f0ad4e;
+}

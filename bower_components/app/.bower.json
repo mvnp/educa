@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "description": "Arquivos base da aplicação",
+  "keywords": [
+    "css",
+    "js"
+  ],
+  "license": "MIT",
+  "main": [
+    "source/css/app.css",
+    "source/css/custom.bootstrap.css",  
+    "source/js/app.js",
+    "source/js/animations.js"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1 - 2",
+    "bootstrap" : "3.3.6"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "description": "Arquivos base da aplicação",
+  "keywords": [
+    "css",
+    "js"
+  ],
+  "license": "MIT",
+  "main": [
+    "profile.css",
+    "profile.js"
+  ]
+}
