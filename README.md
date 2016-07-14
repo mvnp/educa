@@ -1,2 +1,3 @@
-# educa
-Meu repositório do projeto EDUCA
+# Educa Workana
+
+Nosso repositório do projeto EDUCA ...
