@@ -9,6 +9,8 @@
         <title><?php echo $title; ?></title><!-- titulo do site -->
     </head>
     <body>
+        <!-- php que carrega os scripts -->
+        <?PHP foreach($page_JS as $file) echo $file . "\n"; ?>
         
         <?PHP if(isset($is_admin) && $is_admin): ?>
             <?php $this->load->view('admin/index'); ?>
@@ -25,8 +27,11 @@
             <!-- inclui a div fixada no bottom -->
             <?php $this->load->view("template/bottom"); ?>
         <?PHP endif; ?>
-        
-        <!-- php que carrega os scripts -->
-        <?PHP foreach($page_JS as $file) echo $file . "\n"; ?>
+        <script>
+        (function(){
+            $('#categorias_datatable').DataTable();
+        })();
+        </script>
     </body>
 </html>
+

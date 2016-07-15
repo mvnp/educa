@@ -19,9 +19,13 @@ class Profile extends MY_Controller {
         
         //carrega o template
         $vars['view']     = "profile/profile";
-        $this->template->set_title('Entrar no site');;
+        $this->template->set_title('Bem-vindo');;
         $this->template->set_vars($vars);
         $this->template->create_page();
+    }
+    
+    public function exibir($username){
+        
     }
     
 }

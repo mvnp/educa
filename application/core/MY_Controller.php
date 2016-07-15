@@ -113,4 +113,48 @@ abstract class MY_Controller extends CI_Controller {
         return true;
     }
     
+    //gera uma tabela 
+    public function getDataTable($dados,$campos,$id_tabela, $crud = false){
+        
+        //cria o header da tabela
+        $html  = "<table id='".$id_tabela."' class='table table-bordered table-striped'>";
+        $html .= "<thead>";
+        
+        //percorre e lista todos os campos
+        foreach($campos as $campo)
+            $html .= "<th>".$campo."</th>";
+        
+        //verifica se deve acrescentar os campos de crud
+        if($crud)
+            $html .= "<th>Editar</th><th>Remover</th>";
+        
+        
+        //cria o corpo da tabela
+        $html .= "</thead>";
+        $html .="<tbody>";
+        
+        //coloca o conteudo dentro da tabela
+        foreach($dados as $dado) {
+            $html .= "<tr>";
+            foreach($dado as $item){
+                $html .= "<td>".$item."</td>";
+                
+            }
+            
+            //verifica se deve adicionar os campos do crud
+            if($crud) {
+                $html .= "<td><a href='' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></a></td>";
+                $html .= "<td><a href='' class='btn btn-info'><span class='glyphicon glyphicon-edit'></a></td>";
+            }
+            
+            $html .= "</tr>";
+        }
+        
+        //fecha a tabela
+        $html .= "</tbody></table>";
+        
+        //retorna a tabela gerada
+        return $html;
+    }
+    
 }
