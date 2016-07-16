@@ -18,7 +18,7 @@ class Admin extends MY_Controller {
     public function index() {
         
         //carrega o template
-        $vars['view']     = "admin/painel";
+        $vars['view']     = "admin/modules/inicio";
         $vars['is_admin'] = true;
         $this->template->set_title('Entrar no site');;
         $this->template->set_vars($vars);

@@ -73,10 +73,10 @@ class Bower
             
             //pega o .bower.json do modulo
             $object = $this->__ModuleObject($module);
+            
             //pega o nome de todos os arquivos do modulo
             $module_files = $object->main;
-            
-            
+    
             //verifica o tipo da variavel $module_files
             $type = gettype($module_files);
             

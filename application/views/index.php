@@ -9,6 +9,8 @@
         <title><?php echo $title; ?></title><!-- titulo do site -->
     </head>
     <body>
+        <!-- php que carrega os scripts -->
+        <?PHP foreach($page_JS as $file) echo $file . "\n"; ?>
         
         <?PHP if(isset($is_admin) && $is_admin): ?>
             <?php $this->load->view('admin/index'); ?>
@@ -26,7 +28,6 @@
             <?php $this->load->view("template/bottom"); ?>
         <?PHP endif; ?>
         
-        <!-- php que carrega os scripts -->
-        <?PHP foreach($page_JS as $file) echo $file . "\n"; ?>
     </body>
 </html>
+

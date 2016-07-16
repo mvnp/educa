@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "description": "Arquivos base da aplicação",
+  "keywords": [
+    "css",
+    "js"
+  ],
+  "license": "MIT",
+  "main": [
+    "source/css/landing.css",
+    "source/css/timeline.css",
+    "source/js/landing.js"
+  ]
+}

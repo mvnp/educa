@@ -12,10 +12,11 @@
         <!-- primeira linha do header do perfil -->
         <div class="profile_line pull-left">
             <h2>
+                <!--nome de usuário -->
                 <?php echo $this->__user->username; ?>
-                <small>
+                <small class="hidden-xs">
                 <?php echo $this->__user->email;?>
-                </small>
+                </small><!-- email -->
             </h2>
         </div>
         
@@ -27,6 +28,27 @@
             </button>
         </div>
         
+        <div style="clear:both"></div>
+        
+    </div>
+    
+    <div class="col-md-7 profile_tab_wrapper get-center">
+        <a href="#" class="profile_tab profile_tab_active">
+            <span class="glyphicon glyphicon-home"></span>
+            <strong class="hidden-xs">Inicio</strong>
+        </a>
+        <a href="#" class="profile_tab">
+            <span class="glyphicon glyphicon-home"></span>
+            <strong class="hidden-xs">Inicio</strong>
+        </a>
+        <a href="#" class="profile_tab">
+            <span class="glyphicon glyphicon-home"></span>
+            <strong class="hidden-xs">Inicio</strong>
+        </a>
+        <a href="#" class="profile_tab">
+            <span class="glyphicon glyphicon-home"></span>
+            <strong class="hidden-xs">Inicio</strong>
+        </a>
     </div>
     
 </div>
