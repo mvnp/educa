@@ -1,0 +1,20 @@
+/*__ painel com imagem linear-gradient(to right, rgba(89,173,235,0.1) 0%,rgba(53,206,147,0.1) 100%), __*/
+#landing_panel_image{
+    height: 100vh;
+    background: linear-gradient(to right, rgba(89,173,235,0.5) 0%,rgba(53,206,147,0.5) 100%),
+                url('../../../../images/wallpaper.jpg');
+    background-position: center;
+}
+
+#landing_panel_image .landing_slogan{
+    color: #fff;
+    font-weight: light;
+    font-size: 10rem;
+}
+
+@media screen and (max-width: 700px){
+    #landing_panel_image .landing_slogan{
+        font-size: 5rem;
+    }
+    
+} 

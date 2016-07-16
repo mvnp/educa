@@ -114,7 +114,7 @@ abstract class MY_Controller extends CI_Controller {
     }
     
     //gera uma tabela 
-    public function getDataTable($dados,$campos,$id_tabela, $crud = false){
+    public function getDataTable($dados,$campos,$id_tabela, $crud = false,$controller = false, $id_field = false){
         
         //cria o header da tabela
         $html  = "<table id='".$id_tabela."' class='table table-bordered table-striped'>";
@@ -125,7 +125,7 @@ abstract class MY_Controller extends CI_Controller {
             $html .= "<th>".$campo."</th>";
         
         //verifica se deve acrescentar os campos de crud
-        if($crud)
+        if($crud && $controller && $id_field)
             $html .= "<th>Editar</th><th>Remover</th>";
         
         
@@ -136,22 +136,24 @@ abstract class MY_Controller extends CI_Controller {
         //coloca o conteudo dentro da tabela
         foreach($dados as $dado) {
             $html .= "<tr>";
-            foreach($dado as $item){
+            foreach($dado as $item)
                 $html .= "<td>".$item."</td>";
-                
-            }
-            
+                    
             //verifica se deve adicionar os campos do crud
-            if($crud) {
-                $html .= "<td><a href='' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></a></td>";
-                $html .= "<td><a href='' class='btn btn-info'><span class='glyphicon glyphicon-edit'></a></td>";
+            if($crud && $controller && $id_field) {
+                $html .= "<td><a href='".site_url().$controller."/edit/".$dado[$id_field]
+                    ."' class='btn btn-info'><span class='glyphicon glyphicon-edit'></a></td>";
+                $html .= "<td><a href='".site_url().$controller."/remove/".$dado[$id_field]
+                    ."' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></a></td>";
             }
-            
             $html .= "</tr>";
         }
         
         //fecha a tabela
         $html .= "</tbody></table>";
+        
+        //adiciona 
+        $html .= "<script>(function()"."{"."$('#".$id_tabela."').DataTable();})();</script>";
         
         //retorna a tabela gerada
         return $html;

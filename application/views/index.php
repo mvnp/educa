@@ -27,11 +27,7 @@
             <!-- inclui a div fixada no bottom -->
             <?php $this->load->view("template/bottom"); ?>
         <?PHP endif; ?>
-        <script>
-        (function(){
-            $('#categorias_datatable').DataTable();
-        })();
-        </script>
+        
     </body>
 </html>
 

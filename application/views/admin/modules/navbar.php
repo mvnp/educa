@@ -141,7 +141,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="<?php echo site_url();?>admin_subcategorias">
                             <span class="glyphicon glyphicon-list"></span>
                             Sub-categorias
                         </a>
