@@ -6,6 +6,7 @@ class Subcategorias_model extends CI_Model {
     private $__fields;
     public $__table;
     private $__tableID;
+    
     //construct da classe
     public function __construct(){
         parent::__construct();
@@ -59,8 +60,6 @@ class Subcategorias_model extends CI_Model {
         //percorre todas as categorias e cria o option
         foreach($categorias->result_array() as $categoria){
             
-            echo $categoria[$this->categorias_model->getField('Categoria')]."<br>";
-            
             //verifica se deve adicionar a opçao selected
             if($categoria[$this->categorias_model->getField('Categoria')] === $sub_cat)
                 $html .="<option selected='selected' value='".$categoria[$this->categorias_model->getField('CategoriaID')];
@@ -94,6 +93,51 @@ class Subcategorias_model extends CI_Model {
             return $retorno;
         else 
             return false;
+        
+    }
+    
+    //pega a categoria pelo id
+    public function getNameById($id) {
+        $this->db->from($this->__table);
+        $this->db->select('sub_nome');
+        $this->db->where($this->getField('SubID').' = '.$id);
+        $this->db->limit(1);
+        $result = $this->db->get();
+        
+        //guarda os dados
+        if ($result->num_rows() > 0){
+            $query = $result->result_array();
+            return $query[0]['sub_nome'];
+        }
+        else
+            return false;
+        
+    }
+    
+    //pega as subcategorias pelo id do pai
+    public function getByParentID($id = false) {
+        
+        //se nenhum id for informado, retorna falso
+        if(!$id)
+            return false;
+        
+        //busca as categorias
+        $query = $this->db->get_where($this->__table, array($this->getField('SubMaeID') => $id));
+        
+        //se nao existir subcategorias
+        if($query->num_rows() == 0)
+            return false;
+        
+        //se existir
+        $result = $query->result_array();
+        $html = "<option value='' selected>Sub-categoria</option>";
+        
+        //percorre o array para criar as opcoes
+        foreach($result as $item)
+            $html .= "<option value='".$item[$this->getField('SubID')]."'>".$item[$this->getField('SubNome')]."</option>";
+
+        //retorna o html gerado
+        return $html;
         
     }
     

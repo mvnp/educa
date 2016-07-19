@@ -15,15 +15,55 @@ class Profile extends MY_Controller {
         $this->template->set_modules('profile');
     }
     
+    //pagina inicial do perfil
     public function index() {
         
         //carrega o template
         $vars['view']     = "profile/profile";
-        $this->template->set_title('Bem-vindo');;
+        $vars['tab_key']  = "1";
+        $vars['tab_view'] = "inicio";
+        $this->template->set_title('Perfil');;
         $this->template->set_vars($vars);
         $this->template->create_page();
     }
     
+    //pagina de pedidos do perfil
+    public function pedidos() {
+        
+        //carrega o template
+        $vars['view']     = "profile/profile";
+        $vars['tab_key']  = "2";
+        $vars['tab_view'] = "pedidos";
+        $this->template->set_title('Meus pedidos');;
+        $this->template->set_vars($vars);
+        $this->template->create_page();
+    }
+    
+    //pagina de propostas do perfil
+    public function propostas() {
+        
+        //carrega o template
+        $vars['view']     = "profile/profile";
+        $vars['tab_key']  = "3";
+        $vars['tab_view'] = "propostas";
+        $this->template->set_title('Propostas');;
+        $this->template->set_vars($vars);
+        $this->template->create_page();
+    }
+    
+    //pagina de configuração do perfil
+    public function settings() {
+        
+        //carrega o template
+        $vars['view']     = "profile/profile";
+        $vars['tab_key']  = "4";
+        $vars['tab_view'] = "inicio";
+        $this->template->set_title('Perfil');;
+        $this->template->set_vars($vars);
+        $this->template->create_page();
+    }
+    
+    //quando nao é o usuário dono do perfil que tenta visualiza-lo
     public function exibir($username){
         
     }

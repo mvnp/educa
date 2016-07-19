@@ -1,6 +1,116 @@
+/*__ form para inserir um job __*/
 #addform_wrapper {
     background: #fff;
     margin-top: 30px;
     padding-bottom: 50px;
     border: 1px solid #e6e6e6;
+}
+
+/*__ configurações do perfil __*/
+.job_header {
+    width: 100%;
+    height: 500px;
+    background: url('../../images/wallpaper.jpg') center center no-repeat fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+} 
+.job_wrapper {
+    width: 100%;
+    display: table;
+    margin-bottom: -50px;
+    border-top: 1px solid #e6e6e6;
+}
+.job_container{
+    margin-top: -400px;
+    background: #fff;
+    border: 1px solid #ccc;
+    display: table;
+    padding-bottom: 50px;
+}
+
+/*__ sidebar jobs __*/
+.sidebar_jobs{
+    width: 240px;
+    border-left: 1px solid #e6e6e6;
+    display: table;
+    min-height: 100px;
+    float: right;
+    padding: 5px;
+}
+.jobs_content{
+    width: calc(100% - 250px);
+    float: left;
+}
+
+/*__ job article __*/
+.job {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/*__ job title __*/
+.job .job_title {
+    color: #0093ff;
+}
+
+/*__ job data __*/
+.job .job_data .job_data_span {
+    color: #0093ff;
+    border-right: 1px solid #0093ff;
+    padding: 0px 20px;
+    display: inline-block 
+}
+.job .job_data .job_data_span:last-child{ border-right: none }
+.job .job_data .job_data_span:first-child { padding-left: 0px }
+
+/*__ job description __*/
+.job .job_description {
+    padding: 10px 5px;
+}
+
+/*__ job action __*/
+.job .job_action {
+    padding: 10px 0px;
+}
+
+
+/*__ job chat __*/
+.chat_messages{
+    border: 1px solid #e6e6e6;
+    height: 300px;
+    margin: 5px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+.chat_messages ul {
+    list-style: none;
+}
+
+.chat_messages .send { float: right }
+.chat_messages .received { float: left }
+.chat_messages .bubble {
+    width: 70%;
+    background: #f9f9f9;
+    margin: 5px;
+    padding: 20px;
+    color: #909090;
+}
+.chat_messages .bubble .chat_author {
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+}
+.chat_messages .bubble .chat_date {
+    display: block;
+    font-size: 10px;
+}
+
+/*__ mobile __*/
+@media screen and (max-width: 700px) {
+    .job { padding: 5px}
+    .sidebar_jobs{ display: none}
+    .jobs_content { width: 100% }
+    
 }

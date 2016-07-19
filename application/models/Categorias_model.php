@@ -6,6 +6,7 @@ class Categorias_model extends CI_Model {
     private $__fields;
     public $__table;
     private $__tableID;
+    
     //construct da classe
     public function __construct(){
         parent::__construct();
@@ -13,6 +14,24 @@ class Categorias_model extends CI_Model {
         $this->__table = "categorias";
         //seta o nome dos campos
         $this->__setFields();
+    }
+    
+    //pega a categoria pelo id
+    public function getNameById($id) {
+        $this->db->from($this->__table);
+        $this->db->select('desc_nome');
+        $this->db->where($this->getField('CategoriaID').' = '.$id);
+        $this->db->limit(1);
+        $result = $this->db->get();
+        
+        //guarda os dados
+        if ($result->num_rows() > 0){
+            $query = $result->result_array();
+            return $query[0]['desc_nome'];
+        }
+        else
+            return false;
+        
     }
     
     //seta os fields da tabela
@@ -58,6 +77,31 @@ class Categorias_model extends CI_Model {
             return $retorno;
         else 
             return false;
+        
+    }
+    
+    //pega os options para o select
+    public function getOptions(){
+        
+        //pega todas as categorias
+        $categorias = $this->getCategorias();
+        
+        //se nenhum categoria for encontrada, retorna false
+        if($categorias->num_rows() == 0)
+            return false;
+        
+        //pega o array de resposta
+        $categorias = $categorias->result_array();
+        
+        //html de retorno
+        $html = "<option value='' disabled selected>Selecione uma categoria</option>";
+        
+        //adiciona os options no html
+        foreach($categorias as $categoria) {
+            $html .= "<option value='".$categoria[$this->getField('CategoriaID')]."'>".$categoria[$this->getField('Categoria')]."</option>";
+        }
+        
+        return $html;
         
     }
     

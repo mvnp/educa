@@ -1,9 +1,8 @@
-<div class="container">
-    
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<div class="container">   
     <div class="col-md-7 get-center">
-        
         <div class="thumbnail get-margin avatar-wrapper pull-left">
-            <img src="<?PHP base_url(); ?>uploads/default.png" width="100px">
+            <img src="<?PHP echo base_url(); ?>uploads/default.png" width="100px">
             <span class="legend">
                 Alterar
             </span>
@@ -32,23 +31,25 @@
         
     </div>
     
+    <?php if(isset($tab_key)):?>
     <div class="col-md-7 profile_tab_wrapper get-center">
-        <a href="#" class="profile_tab profile_tab_active">
+        <a href="<?php echo site_url().'profile';?>" class="profile_tab <?php echo ($tab_key == 1)? "profile_tab_active" : "";?>">
             <span class="glyphicon glyphicon-home"></span>
             <strong class="hidden-xs">Inicio</strong>
         </a>
-        <a href="#" class="profile_tab">
-            <span class="glyphicon glyphicon-home"></span>
-            <strong class="hidden-xs">Inicio</strong>
+        <a href="<?php echo site_url().'profile/pedidos';?>" class="profile_tab <?php echo ($tab_key == 2)? "profile_tab_active" : "";?>">
+            <span class="glyphicon glyphicon-education"></span>
+            <strong class="hidden-xs">Pedidos</strong>
         </a>
-        <a href="#" class="profile_tab">
-            <span class="glyphicon glyphicon-home"></span>
-            <strong class="hidden-xs">Inicio</strong>
+        <a href="<?php echo site_url().'profile/propostas';?>" class="profile_tab <?php echo ($tab_key == 3)? "profile_tab_active" : "";?>">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <strong class="hidden-xs">Propostas</strong>
         </a>
-        <a href="#" class="profile_tab">
-            <span class="glyphicon glyphicon-home"></span>
-            <strong class="hidden-xs">Inicio</strong>
+        <a href="<?php echo site_url().'profile/settings';?>" class="profile_tab <?php echo ($tab_key == 4)? "profile_tab_active" : "";?>">
+            <span class="glyphicon glyphicon-cog"></span>
+            <strong class="hidden-xs">Configurações</strong>
         </a>
     </div>
+    <?php endif; ?>
     
 </div>

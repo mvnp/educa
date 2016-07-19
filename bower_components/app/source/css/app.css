@@ -24,7 +24,7 @@
 .inline-block {
     display: inline-block;
 }
-
+.block { display: block }
 /*__ text colors __*/
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
@@ -84,6 +84,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 0px;
     display: table;
     border-bottom: 1px solid #e0dddd;
+    z-index: 9999;
 }
 .header .header-row {height: 70px}
 .header .header-row .header-icone {
@@ -193,6 +194,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0px;
     height: 10px;
     width: 100%;
+    display: none;
 }
 
 /*__Input wrapper__*/

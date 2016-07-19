@@ -4,12 +4,38 @@
     background: linear-gradient(to right, rgba(89,173,235,0.5) 0%,rgba(53,206,147,0.5) 100%),
                 url('../../../../images/wallpaper.jpg');
     background-position: center;
+    display: table;
 }
-
 #landing_panel_image .landing_slogan{
     color: #fff;
     font-weight: light;
     font-size: 10rem;
+}
+
+/*__ opniao dos usuairos __*/
+#opiniao_usuarios{
+    height: 200px;
+    background: #fff;
+    display: table;
+    padding-bottom: 50px;
+    width: 100%;
+    border-top: 1px solid #ccc;
+}
+
+#opiniao_usuarios .user_pic{
+    width: 100px;
+    border-radius: 50%;
+}
+#opiniao_usuarios .user_wrapper{
+    padding-top: 50px;
+}
+
+/* footer */
+#footer_landing_page {
+    width: 100%;
+    height: 100px;
+    background: #2D3033;
+    margin-bottom: -50px;
 }
 
 @media screen and (max-width: 700px){

@@ -12,6 +12,7 @@
     </center>
 </div>
 
+<!-- timeline -->
 <div class="container">
     
     <h1 style="text-align: center;">
@@ -126,9 +127,30 @@
     </ul>
 </div>
 
-
-<div class="container">
-    <div class="page-header">
-        <h1>Página Inicial</h1>
+<!-- usuarios -->
+<div id="opiniao_usuarios" class="container-fluid">
+    <div class="container">
+        <center>
+            <h2>Junte-se ao nosso grupo</h2>
+            <h3 class="col-md-5 get-center">Code School has impacted over a million students from 237 countries. Read how these students learn by doing with Code School courses and screencasts.s</h3>
+        </center>
+    
+        <?php for($i=0;$i<3;$i++):?>    
+        <div class="col-md-4 user_wrapper">
+        <br>    
+        <p>
+            “I had never tried to learn code before out of fear that I wasn’t ‘techy enough’ and probably not smart enough — I was a Mathlete, but I spent most of my time making doodles with the DRAW function of my TI89. Every time I finish a Code School lesson, I feel like I prove that fear wrong. I truly appreciate you making an accessible resource.”</p>
+            <center>
+                <img class="user_pic" src="<?php echo base_url()?>images/user_icon.jpg">
+                <h4>Juliana Alves Pereira</h4>
+            </center>
+        </div>
+        <?php endfor; ?>
     </div>
+    
 </div>
+
+<!-- footer -->
+<footer id="footer_landing_page">
+
+</footer>
