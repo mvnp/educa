@@ -22,7 +22,7 @@ class Profile extends MY_Controller {
         $vars['view']     = "profile/profile";
         $vars['tab_key']  = "1";
         $vars['tab_view'] = "inicio";
-        $this->template->set_title('Perfil');;
+        $this->template->set_title('Perfil');
         $this->template->set_vars($vars);
         $this->template->create_page();
     }
