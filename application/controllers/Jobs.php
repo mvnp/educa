@@ -33,8 +33,6 @@ class Jobs extends MY_Controller{
         $config["per_page"]   = 20;
         $config["uri_segment"]= 3;
         
-        
-        
         //seta os filtros
         $filter_cat     = $this->input->post('cat_principal');
         $filter_cat_sec = $this->input->post('cat_sec');
