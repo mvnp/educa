@@ -54,7 +54,7 @@ class Jobs_model extends CI_Model {
         $this->db->from($this->__table." a");
         $this->db->join('categorias b', 'b.categoria_id = a.categoria_id');
         $this->db->join('subcategorias c', 'c.sub_id = a.sub_id','left');
-        
+            
         //verifica se existem filtros
         if($this->session->userdata('filter_cat_principal_id'))
             $this->db->where('a.categoria_id',$this->session->userdata('filter_cat_principal_id'));

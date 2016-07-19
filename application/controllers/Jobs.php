@@ -40,31 +40,34 @@ class Jobs extends MY_Controller{
         $filter_cat_sec = $this->input->post('cat_sec');
         $filter_orc     = $this->input->post('desc_orcamento');
         
+        //salva os filtros na sessão
+        $filter_cat_id = ($filter_cat) ? $filter_cat : false; 
+        $filter_cat    = ($filter_cat) ? $this->categorias_model->getNameById($filter_cat) : false;
+
+        $filter_cat_sec_id = ($filter_cat_sec) ? $filter_cat_sec : false; 
+        $filter_cat_sec    = ($filter_cat_sec) ? $this->subcategorias_model->getNameById($filter_cat_sec) : false;
+
+        $this->session->set_userdata('filter_cat_principal', $filter_cat);
+        $this->session->set_userdata('filter_cat_principal_id', $filter_cat_id);
+
+        $this->session->set_userdata('filter_cat_sec', $filter_cat_sec);
+        $this->session->set_userdata('filter_cat_sec_id', $filter_cat_sec_id);
+
+        $this->session->set_userdata('filter_desc_orc', $filter_orc);
+        
         //verifica se existem filtros
-        if(!$filter_cat && !$filter_cat_sec && !$filter_orc) {
+        if( !$this->session->userdata('filter_cat_principal') &&
+            !$this->session->userdata('filter_cat_principal_id') &&
+            !$this->session->userdata('filter_cat_sec') &&
+            !$this->session->userdata('filter_cat_sec_id') &&
+            !$this->session->userdata('filter_desc_orc')) {
+            
             $no_filters = true;
+            //$this->remove_filters();
         }
         else {
-            //salva os filtros na sessão
-            $filter_cat_id = ($filter_cat) ? $filter_cat : false; 
-            $filter_cat    = ($filter_cat) ? $this->categorias_model->getNameById($filter_cat) : false;
-
-            $filter_cat_sec_id = ($filter_cat_sec) ? $filter_cat_sec : false; 
-            $filter_cat_sec    = ($filter_cat_sec) ? $this->subcategorias_model->getNameById($filter_cat_sec) : false;
-
-            $this->session->set_userdata('filter_cat_principal', $filter_cat);
-            $this->session->set_userdata('filter_cat_principal_id', $filter_cat_id);
-
-            $this->session->set_userdata('filter_cat_sec', $filter_cat_sec);
-            $this->session->set_userdata('filter_cat_sec_id', $filter_cat_sec_id);
-
-            $this->session->set_userdata('filter_desc_orc', $filter_orc);
-            
             $no_filters = false;
         }
-        
-        
-        
         
         //inicializa a paginação
         $this->pagination->initialize($config);
