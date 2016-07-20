@@ -12,7 +12,11 @@ class Profile extends MY_Controller {
             return false;
         }
         
+        //carrega o modulo profile
         $this->template->set_modules('profile');
+
+        //carrega as models
+        $this->load->model(array('jobs_model'));
     }
     
     //pagina inicial do perfil
@@ -30,10 +34,14 @@ class Profile extends MY_Controller {
     //pagina de pedidos do perfil
     public function pedidos() {
         
+        //pega todos os pedidos que o usuário fez
+        $pedidos = $this->jobs_model->getJobByUserid($this->__user->id);
+
         //carrega o template
         $vars['view']     = "profile/profile";
         $vars['tab_key']  = "2";
         $vars['tab_view'] = "pedidos";
+        $vars['pedidos']  = $pedidos;
         $this->template->set_title('Meus pedidos');;
         $this->template->set_vars($vars);
         $this->template->create_page();

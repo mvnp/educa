@@ -65,6 +65,7 @@ class Jobs_model extends CI_Model {
         
         //pega somente os ativos
         $this->db->where('a.flg_status','A');
+        $this->db->order_by("a.date_pub", "desc");
         
         $query = $this->db->get();
         
@@ -77,14 +78,58 @@ class Jobs_model extends CI_Model {
             return $data;
         }
         return false;
-    
     }
-        
-    
-    
+
     //adiciona um novo pedido de aula
     public function add($dados){
         return $this->db->insert($this->__table, $dados);
     }
     
+    //pega os dados de um job pelo id
+    public function getJobById($id = false){
+
+        //valida o id
+        if(!$id || !is_numeric($id))
+            return false;
+
+        //faz a busca
+        $this->db->select('*');
+        $this->db->limit('1');
+        $this->db->from($this->__table.' a');
+        $this->db->join('categorias b', 'b.categoria_id = a.categoria_id');
+        $this->db->join('subcategorias c', 'c.sub_id = a.sub_id','left');
+        $this->db->join('users d', 'a.user_id = d.id');
+        $this->db->where($this->getField('JobID'), $id);
+        $query = $this->db->get();
+        
+        //verifica se houve resposta
+        if($query->num_rows() > 0) { 
+            $query = $query->result();   
+            return $query[0];
+        } else {
+            return false;
+        }        
+    }
+
+    //pega os jobs pelo id do usuário
+    public function getJobByUserid($user_id) {
+        //valida o id
+        if(!$user_id || !is_numeric($user_id))
+            return false;
+
+        //faz a busca
+        $this->db->select('a.*');
+        $this->db->from($this->__table.' a');
+        $this->db->join('categorias b', 'b.categoria_id = a.categoria_id');
+        $this->db->join('subcategorias c', 'c.sub_id = a.sub_id','left');
+        $this->db->join('users d', 'a.user_id = d.id');
+        $this->db->where($this->getField('Autor'), $user_id);
+        $query = $this->db->get();
+        
+        //verifica se houve resposta
+        if($query->num_rows() > 0)   
+            return $query->result();
+        else 
+            return false; 
+    }
 }

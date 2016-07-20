@@ -25,13 +25,13 @@
             <h3>Detalhes</h3>
             <div class="well col-md-12">
                 <div class="col-md-6">
-                    <strong>$ Orçamento: </strong> R$ 50,00
+                    <strong>$ Orçamento: </strong> <?php echo $job->desc_orcamento; ?>
                 </div>
                 <div class="col-md-6">
                     <strong>
                         <span class="glyphicon glyphicon-calendar"></span>&nbsp; 
                         Publicado: 
-                    </strong> 14:00 17/11/1996
+                    </strong> <?php echo date('d-m-Y', strtotime($job->date_pub)); ?>
                 </div>
                 <div class="col-md-6">
                     <strong>
@@ -47,32 +47,22 @@
                 </div>
                 <div class="col-md-12">
                     <br>
-                    <span class="label label-success">Matemática</span>
-                    <span class="label label-success">Matemática</span>
-                    <span class="label label-success">Matemática</span>
+                    <span class="label label-success"><?php echo $job->desc_nome ;?></span>
+                    <?php if(isset($job->sub_nome)):?>
+                    <span class="label label-warning"><?php echo $job->sub_nome; ?></span>
+                    <?php endif; ?>
                 </div>
             </div>
             
             <!-- descrição -->
-            <h3>Descrição</h3>
+            <h3><?php echo $job->desc_title; ?></h3>
             <div class="col-md-12">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                </p>
+                <p><?php echo $job->desc_descricao; ?></p>
             </div>
             
             <!-- botoes de ação -->
             <div class="col-md-12">
-                <a href="<?php echo site_url(); ?>jobs/proposta/2" class="btn btn-success btn-lg">Fazer uma proposta</a>
+                <a href="<?php echo site_url(); ?>jobs/proposta/<?php echo $job->job_id; ?>" class="btn btn-success btn-lg">Fazer uma proposta</a>
                 <a href="<?php echo site_url(); ?>jobs/chat/4" class="btn btn-info pull-right">Fazer uma pergunta</a>
             </div>
             

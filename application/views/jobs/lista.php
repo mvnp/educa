@@ -83,7 +83,7 @@
                 </div>
                 
                 <div class="job_action">
-                    <a href="<?php echo site_url();?>jobs/aula/2" class="btn btn-pill btn-pill-info">
+                    <a href="<?php echo site_url();?>jobs/aula/<?php echo $job->job_id;?>" class="btn btn-pill btn-pill-info">
                         Fazer proposta
                     </a>
                     <a href="#" class="btn btn-pill btn-pill-warning">

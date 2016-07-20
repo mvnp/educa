@@ -16,12 +16,13 @@
     <section class="col-md-12">
         
         <!-- html do pedido -->
-        <?php for($i=0;$i<5;$i++):?>
+        <?php if($pedidos):?>
+        <?php foreach($pedidos as $pedido):?>
         <article class="pedido">
             <!-- titulo do pedido -->
             <div class="pedido_title">
                 <h3>
-                    Aula de matemática
+                    <?PHP echo $pedido->desc_title; ?>
                     <small>
                         <span class="label label-success">Aberto</span>
                     </small>
@@ -31,13 +32,13 @@
             <!-- dados do pedido -->
             <div class="pedido_data">
                 <span class="data_container">
-                    <strong>Postado em: </strong> 17/11/1996
+                    <strong>Postado em: </strong> <?php echo date('d-m-y', strtotime($pedido->date_pub));?>
                 </span>
             </div>
             
             <!-- descrição do pedido -->
             <div class="pedido_description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p><?php echo $pedido->desc_descricao; ?></p>
             </div>
             
             <!-- dados do pedido -->
@@ -70,8 +71,11 @@
                 </a>
             </div>
         </article><!-- html do pedido -->
-        <?php endfor;?>
-        
+        <?php endforeach;?>
+        <?php else :?>
+        <h2><center>Nenhum pedido encontrado</center></h2>
+        <?php endif;?>
+
     </section>
     
     <!-- paginaçao -->

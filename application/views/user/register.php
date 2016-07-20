@@ -16,7 +16,7 @@
     <p class="dark-text get-margin">
         Faça seu registro gratuito agora mesmo, e tenha acesso a todo o serviço do nosso site.
     </p>
-    <!-- caixa para o email -->
+    <!-- caixa para o nome de usuario -->
     <label class="input-wrapper-label dark-text" for="">Nome de usuário</label>
     <div class="input-wrapper">
         <input  type="text" 

@@ -3,6 +3,7 @@
 //controller para as requisições ajax
 class Ajax extends MY_Controller {
     
+    //construct da classe
     public function __construct(){
         
         //pega o construct do pai
@@ -33,8 +34,7 @@ class Ajax extends MY_Controller {
         if(!$cat)
             echo "<option value=''>Nenhuma subcategoria encontrada</option>";
         else
-            echo $cat;
-        
+            echo $cat;     
     }
     
 }

@@ -21,13 +21,13 @@
             <h3>Detalhes</h3>
             <div class="well col-md-12">
                 <div class="col-md-6">
-                    <strong>$ Orçamento: </strong> R$ 50,00
+                    <strong>$ Orçamento: </strong> <?php echo $job->desc_orcamento; ?>
                 </div>
                 <div class="col-md-6">
                     <strong>
                         <span class="glyphicon glyphicon-calendar"></span>&nbsp; 
                         Publicado: 
-                    </strong> 14:00 17/11/1996
+                    </strong> <?php echo date('d-m-Y', strtotime($job->date_pub)); ?>
                 </div>
                 <div class="col-md-6">
                     <strong>
@@ -43,22 +43,31 @@
                 </div>
                 <div class="col-md-12">
                     <br>
-                    <span class="label label-success">Matemática</span>
-                    <span class="label label-success">Matemática</span>
-                    <span class="label label-success">Matemática</span>
+                    <span class="label label-success"><?php echo $job->desc_nome ;?></span>
+                    <?php if(isset($job->sub_nome)):?>
+                    <span class="label label-warning"><?php echo $job->sub_nome; ?></span>
+                    <?php endif; ?>
                 </div>
             </div>
             
+            <!-- alert de erros -->
+            <?php if($error): ?>
+            <div class="col-md-12 alert alert-danger">
+                <p><strong>Erro! </strong><?php echo $error; ?></p>
+            </div>
+            <?php endif; ?> 
+            
             <!-- formulario de propostas -->
+            <?php if(!$has_propose): ?>
             <form class="col-md-12" action="<?php site_url()."jobs/propostas"?>" method="post">
                 <h4>Fale mais sobre sua proposta</h4>
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea class="form-control" name="descricao_proposta" rows="5"></textarea>
                 
                 <h4>Proposta</h4>
                 <label for="price">Diga o seu preço</label>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">$</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                    <input type="text" name="valor_proposta" class="form-control money" placeholder="Valor" aria-describedby="basic-addon1">
                 </div>
                 
                 <div class="text-danger">
@@ -67,10 +76,16 @@
                 </div>
                 
                 <br>
-                <button type="submit" class="btn btn-success btn-lg">Fazer proposta</button>
-                
+                <button type="submit" class="btn btn-success btn-lg">Fazer proposta</button>    
             </form>
-            
+            <?php else:?>
+            <div class="col-md-12 alert alert-info">
+                <p>
+                    <strong>Você já fez uma proposta para esse pedido</strong>
+                    Acompanhe e edite sua proposta a partir do painel de controle no seu perfil.
+                </p>
+            </div>    
+            <?php endif;?>
         </div>
         
         <!-- detalhes do cliente -->

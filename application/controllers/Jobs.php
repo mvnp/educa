@@ -8,7 +8,7 @@ class Jobs extends MY_Controller{
         
         //verifica se o usuário está logado
         if(!$this->__logged) {
-            redirect(site_url().'user/login');
+            redirect(site_url().'user/login'); 
             return false;
         }
         
@@ -72,14 +72,10 @@ class Jobs extends MY_Controller{
 
         //seta a variavel e faz a busca
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $data["results"] = $this->jobs_model->paginate($config["per_page"], $page);
+        $data["results"] = $this->jobs_model->paginate($config["per_page"], $per_page);
         
         //seta os links da páginação
         $data["links"] = $this->pagination->create_links();
-        
-        /*echo "<pre>";
-        print_r($data["results"] );
-        exit();*/
         
         //pega o options das categorias
         $options_categoria = $this->categorias_model->getOptions();
@@ -117,8 +113,18 @@ class Jobs extends MY_Controller{
             return false;
         }
         
+        //pega os dados do job
+        $sql = $this->jobs_model->getJobById($id);
+
+        //se o job nao existir, redireciona para a listagem
+        if(!$sql) {
+            redirect(site_url().'jobs');
+            return false;
+        }
+
         //carrega o template
-        $vars['view']     = "jobs/detail";
+        $vars['view'] = "jobs/detail";
+        $vars['job']  = $sql;
         $this->template->set_title('Aula');;
         $this->template->set_vars($vars);
         $this->template->create_page();
@@ -131,13 +137,53 @@ class Jobs extends MY_Controller{
             redirect(site_url()."/jobs");
             return false;
         }
+
+        //carrega a model de propostas
+        $this->load->model('propostas_model');
         
+        //pega os dados do job
+        $sql = $this->jobs_model->getJobById($id);
+
+        //se o job nao existir, redireciona para a listagem
+        if(!$sql) {
+            redirect(site_url().'jobs');
+            return false;
+        }  
+
+        //faz a validação do formulario
+        $this->validate->set_rules($this->__setPropostaForm());
+        $error = false;
+
+        //testa o formulário
+        if($this->validate->run()){
+
+            //pega os dados
+            $dados['job_id']  = $id;
+            $dados['user_id'] = $this->__user->id;
+            $dados['desc_descricao'] = $this->input->post('descricao_proposta');
+            $dados['desc_valor'] = $this->input->post('valor_proposta');
+
+            //tenta salvar a proposta
+            $this->propostas_model->add($dados); 
+        } else {
+            if(validation_errors())
+                $error = validation_errors();
+        }
+
+        //verifica se o usuário ja fez uma proposta para esse trabalho
+        $has_propose = $this->propostas_model->has_propose($id);
+
+        //chame o jmask
+        $this->template->set_modules('jmask'); 
+
         //carrega o template
-        $vars['view']     = "jobs/proposta";
+        $vars['view']        = "jobs/proposta";
+        $vars['job']         = $sql;
+        $vars['error']       = $error;
+        $vars['has_propose'] = $has_propose;
         $this->template->set_title('Proposta');;
         $this->template->set_vars($vars);
-        $this->template->create_page();
-        
+        $this->template->create_page();      
     }
     
     //pagina do chat
@@ -198,6 +244,11 @@ class Jobs extends MY_Controller{
         $this->template->create_page();
     }
     
+    //edita um pedido
+    public function edit(){
+        
+    }
+
     //regras de validação para o formulário
     private function __setAddForm(){
         $config = array(
@@ -231,4 +282,21 @@ class Jobs extends MY_Controller{
         return $config;
     }
     
+    //regras de validacao para propostas
+    private function __setPropostaForm(){
+        $config = array(
+            array(
+                'field' => 'descricao_proposta',
+                'label' => 'Descrição',
+                'rules' => 'required|trim'
+            ),
+            array(
+                'field' => 'valor_proposta',
+                'label' => 'Valor',
+                'rules' => 'required|trim|numeric'
+            )
+        );
+            
+        return $config;
+    }   
 }
