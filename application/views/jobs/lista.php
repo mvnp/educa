@@ -51,7 +51,7 @@
             <?php if($result):?>
             <?php foreach($result as $job):?>
             <!-- inicio do article do job -->
-            <article class="job">
+            <article class="job <?php echo ($job->user_id == $this->__user->id)? "my_job": ""; ?>">
                 <h2 class="job_title">
                     <?php echo $job->desc_title; ?>
                 </h2>
@@ -82,14 +82,18 @@
                     <?php endif; ?>
                 </div>
                 
+                
                 <div class="job_action">
+                    <?php if($job->user_id != $this->__user->id):?>
                     <a href="<?php echo site_url();?>jobs/aula/<?php echo $job->job_id;?>" class="btn btn-pill btn-pill-info">
                         Fazer proposta
                     </a>
                     <a href="#" class="btn btn-pill btn-pill-warning">
                         Denunciar
                     </a>
+                    <?php endif; ?>
                 </div>
+                
                 
             </article><!-- fim do article do job -->
             <?php endforeach; ?>

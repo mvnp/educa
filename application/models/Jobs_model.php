@@ -112,13 +112,14 @@ class Jobs_model extends CI_Model {
     }
 
     //pega os jobs pelo id do usuário
-    public function getJobByUserid($user_id) {
+    public function getJobByUserid($user_id, $limit = 0, $start = 0) {
         //valida o id
         if(!$user_id || !is_numeric($user_id))
             return false;
 
         //faz a busca
         $this->db->select('a.*');
+        $this->db->limit($limit, $start);
         $this->db->from($this->__table.' a');
         $this->db->join('categorias b', 'b.categoria_id = a.categoria_id');
         $this->db->join('subcategorias c', 'c.sub_id = a.sub_id','left');
@@ -131,5 +132,43 @@ class Jobs_model extends CI_Model {
             return $query->result();
         else 
             return false; 
+    }
+
+    //conta os resultados de jobs de um usuario
+    public function record_count_by_user_id($user_id = false, $limit = 0, $start = 0) {
+
+        //valida o id
+        if(!$user_id || !is_numeric($user_id))
+            return false;
+
+        //faz a busca
+        $this->db->select('a.*');
+        $this->db->limit($limit, $start);
+        $this->db->from($this->__table.' a');
+        $this->db->join('categorias b', 'b.categoria_id = a.categoria_id');
+        $this->db->join('subcategorias c', 'c.sub_id = a.sub_id','left');
+        $this->db->join('users d', 'a.user_id = d.id');
+        $this->db->where($this->getField('Autor'), $user_id);
+        $query = $this->db->get();
+        
+        //verifica se houve resposta
+        return $query->num_rows();
+    }
+
+    //indica se o job pode receber propostas
+    public function allowed_propose($job_id = false) {
+
+        //valida o id
+        if(!$job_id || !is_numeric($job_id))
+            return false;
+
+        //pega o job
+        $job = $this->getJobById($job_id);
+
+        //verifica o flg
+        if(strcmp($job->flg_status , "A") == 0)
+            return true;
+        else
+            return false;
     }
 }

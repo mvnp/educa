@@ -48,6 +48,11 @@
 .job {
     background: #fff;
     border-bottom: 1px solid #e6e6e6;
+    padding: 5px 20px;
+}
+
+.my_job {
+    background: #f0f7ef;
 }
 
 /*__ job title __*/

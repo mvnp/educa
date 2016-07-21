@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Propostas_model extends CI_Model {
+class Propostas_model extends CI_Model { 
 	//variaveis da model
     public $__fields;
     private $__table;
@@ -14,6 +14,9 @@ class Propostas_model extends CI_Model {
         
         //seta os campos da tabela
         $this->__setFields();
+    
+        //carrega as models necessárias
+        $this->load->model(array('jobs_model'));
     }
     
     //seta os fields da tabela
@@ -22,18 +25,32 @@ class Propostas_model extends CI_Model {
         $fields = array();
         
         //campos da tabela
-        $fields["PropostaID"] = "job_id";
-        $fields["JobID"]      = "categoria_id";
-        $fields["Autor"]      = "sub_id";
-        $fields["Valor"]      = "desc_orcamento";
+        $fields["PropostaID"] = "proposta_id";
+        $fields["JobID"]      = "job_id";
+        $fields["Autor"]      = "user_id";
+        $fields["Valor"]      = "desc_valor";
         $fields["Descricao"]  = "desc_descricao";
-        $fields["Data"]       = "desc_title";
+        $fields["Data"]       = "date_pub";
         $fields["Status"]     = "flg_status";    
         
         //salva na global
         $this->__fields = $fields;
     }
     
+    //pega um proposta pelo id
+    public function get($id_proposta = false) {
+
+        $this->db->from($this->__table.' a');
+        $this->db->select('a.*, b.desc_descricao as job_desc, b.desc_title as job_title, c.username, c.email, c.id');
+        $this->db->join('jobs b','a.job_id = b.job_id');
+        $this->db->join('users c','a.user_id = c.id');
+
+        $query = $this->db->get();
+
+        return $query->result();
+
+    }
+
     //pega o nome de um campo pelo alias
     public function getField($field){
         return (isset($this->__fields[$field])) ? $this->__fields[$field] : false;        
@@ -49,6 +66,10 @@ class Propostas_model extends CI_Model {
     	if($check)
     		return false;
 
+        //verifica se o job escolhido pode receber propostas
+        if(!$this->jobs_model->allowed_propose($dados['job_id'])) 
+            return false; 
+            
     	//insere os dados na tabela
     	return $this->db->insert($this->__table, $dados);
     }
@@ -77,4 +98,76 @@ class Propostas_model extends CI_Model {
     	else
     		return false;
     }
+
+    //pega as propostas em um job pelo id do job
+    public function getProposes($user_id = false, $received = false, $limit = 1, $start = 0){
+
+    	//valida o id
+    	if(!$user_id || !is_numeric($user_id))
+    		return false;
+
+    	$this->db->from($this->__table.' as a');
+    	$this->db->limit($limit, $start);
+    	$this->db->select('a.*, b.desc_title, c.username');
+    	$this->db->join('users c', 'a.user_id = c.id');
+    	$this->db->join('jobs b', 'a.job_id = b.job_id');
+        $this->db->order_by("a.proposta_id", "desc");
+
+    	//seta o where
+    	if($received === "feitas")
+    		$this->db->where('a.'.$this->getField('Autor'),$user_id);
+    	else
+    		$this->db->where('b.user_id',$user_id);
+
+    	$query = $this->db->get();
+
+    	//array de retorno
+    	$retorno = array(); 
+
+    	//verifica se existem resultados
+    	if($query->num_rows() > 0) {
+    		
+    		//cria a flag
+    		foreach($query->result() as $proposta) {
+
+    			if($proposta->flg_status === "A")
+    				$tag = "<span class='label label-info'>Aberta</span>";
+    			
+    			$proposta->flg_status = $tag;
+
+    			$retorno[] = $proposta;
+
+    		}	
+
+    		//volta o array
+    		return $retorno;
+    	}
+    	else
+    		return false;
+    }
+
+    //pega a quantidade de resultados
+    public function record_count($user_id = false, $received = false){
+
+    	//valida o id
+    	if(!$user_id || !is_numeric($user_id))
+    		return false;
+
+    	$this->db->from($this->__table.' as a');
+    	$this->db->select('a.*, b.desc_title, c.username');
+    	$this->db->join('users c', 'a.user_id = c.id');
+    	$this->db->join('jobs b', 'a.job_id = b.job_id');
+        
+    	//seta o where
+    	if($received === "feitas")
+    		$this->db->where('a.'.$this->getField('Autor'),$user_id);
+    	else
+    		$this->db->where('b.user_id',$user_id);
+
+    	$query = $this->db->get();
+
+    	//verifica se existem resultados
+    	return $query->num_rows();
+    }
+
 }

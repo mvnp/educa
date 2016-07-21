@@ -6,31 +6,33 @@
         <h3 class="pull-left">Propostas</h3>
     </div>
     
-    <!-- filtros de buscas -->
-    <div class="well col-md-12">
-        <strong class="block">Exibir:</strong>
-        <label>
-            <input type="radio" name="propostas" checked> Propostas nos meus pedidos
-        </label>
-        <label>
-            <input type="radio" name="propostas"> Minhas propostas
-        </label> 
+    <!-- tabs de busca -->
+    <div class="col-md-12">
+        <ul class="nav nav-pills">
+            <li role="presentation" <?php echo ($type == "recebidas") ? 'class="active"': '';?>>
+                <a href="<?php echo site_url()."profile/propostas/recebidas"; ?>">Recebidas</a>
+            </li>
+            <li role="presentation" <?php echo ($type == "feitas") ? 'class="active"': '';?>>
+                <a href="<?php echo site_url()."profile/propostas/feitas"; ?>">Feitas</a>
+            </li>
+        </ul>
     </div>
     
     <!-- wrapper dos pedidos -->
     <section class="col-md-12">
         
         <!-- html do pedido -->
-        <?php for($i=0;$i<5;$i++):?>
+        <?php if($propostas): ?>
+        <?php foreach($propostas as $proposta):?>
         <article class="pedido">
             <!-- titulo do pedido -->
             <div class="pedido_title">
-                <h3>
-                    Gustavo vilas boas em Aula de Matemática
+                <h4>
+                    <?php echo $proposta->username; ?> <span class="dark-text">em <?php echo $proposta->desc_title; ?></span>
                     <small>
-                        <span class="label label-danger">Recusada</span>
+                        <?php echo $proposta->flg_status; ?>
                     </small>
-                </h3>
+                </h4>
             </div>
             
             <!-- dados do pedido -->
@@ -45,51 +47,39 @@
             
             <!-- descrição do pedido -->
             <div class="pedido_description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
+            <p><?php echo $proposta->desc_descricao; ?></div>
 
             <!-- botoes de ação -->
             <div class="pedido_action">
                 <br>
-                <a href="#" class="btn btn-pill btn-pill-info">
+                <a href="<?php echo site_url(); ?>propostas/exibir/<?php echo $proposta->proposta_id; ?>" class="btn btn-pill btn-pill-info">
                     <small>
                         <span class="glyphicon glyphicon-eye-open"></span>
                         Ver detalhes
                     </small>
                 </a>
                 
+                <?php if($type == 'feitas'): ?>
                 <a href="#" class="btn btn-pill btn-pill-warning">    
                     <small>
                         <span class="glyphicon glyphicon-remove"></span>
                         Deletar proposta
                     </small>
                 </a>
+                <?php endif; ?>
+
             </div>
         </article><!-- html do pedido -->
-        <?php endfor;?>
-        
+        <?php endforeach;?>
+        <?php else :?>
+        <h3>Nenhuma proposta encontrada</h3>
+        <?PHP endif; ?>    
     </section>
     
     <!-- paginaçao -->
     <section class="col-md-12">
         <nav class="col-md-5 col-md-offset-4">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
+            <?php echo $links;?>
         </nav>
     </section>
     

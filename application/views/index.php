@@ -9,6 +9,9 @@
         <title><?php echo $title; ?></title><!-- titulo do site -->
     </head>
     <body>
+        <!-- guarda a url pro js -->
+        <input type="hidden" value="<?php echo site_url(); ?>" id="site_url">
+
         <!-- php que carrega os scripts -->
         <?PHP foreach($page_JS as $file) echo $file . "\n"; ?>
         

@@ -2,10 +2,12 @@
 <div class="container">   
     <div class="col-md-7 get-center">
         <div class="thumbnail get-margin avatar-wrapper pull-left">
-            <img src="<?PHP echo base_url(); ?>uploads/default.png" width="100px">
-            <span class="legend">
+            <img src="<?php echo base_url();?>images/loading.gif" class="loading_avatar hidden" width="100px">
+            <img id="profile_avatar" src="<?PHP echo base_url(); ?>uploads/<?php echo $this->__user->foto; ?>" width="100px">
+            <label class="legend" for="avatar_file">
                 Alterar
-            </span>
+            </label>
+            <input type="file" class="hidden" id="avatar_file" name="avatar_file" accept="image/png, image/jpeg">
         </div>
         
         <!-- primeira linha do header do perfil -->

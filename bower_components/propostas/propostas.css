@@ -1,0 +1,25 @@
+.proposta_wrapper {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    height: 50px;
+    margin-top: 10px;
+    display: table;
+    padding-bottom: 50px;
+}
+
+/*__ box de informacoes __*/
+.informacoes {
+    padding: 10px;
+}
+.informacoes .title {
+    display: block;
+    font-size: 18px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.informacoes .item {
+    padding: 5px;
+    display: block;
+}

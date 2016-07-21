@@ -72,7 +72,7 @@ class Jobs extends MY_Controller{
 
         //seta a variavel e faz a busca
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        $data["results"] = $this->jobs_model->paginate($config["per_page"], $per_page);
+        $data["results"] = $this->jobs_model->paginate($config["per_page"], $page * $config["per_page"]);
         
         //seta os links da páginação
         $data["links"] = $this->pagination->create_links();
@@ -149,6 +149,13 @@ class Jobs extends MY_Controller{
             redirect(site_url().'jobs');
             return false;
         }  
+
+        //se o job for do usuaro, redirecionar para a lista
+        if($sql->user_id == $this->__user->id){
+            redirect(site_url().'jobs');
+            return false;
+        } 
+            
 
         //faz a validação do formulario
         $this->validate->set_rules($this->__setPropostaForm());
@@ -245,8 +252,7 @@ class Jobs extends MY_Controller{
     }
     
     //edita um pedido
-    public function edit(){
-        
+    public function edit(){       
     }
 
     //regras de validação para o formulário
@@ -298,5 +304,6 @@ class Jobs extends MY_Controller{
         );
             
         return $config;
-    }   
+    }
+
 }

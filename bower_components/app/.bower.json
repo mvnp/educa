@@ -10,7 +10,8 @@
     "source/css/app.css",
     "source/css/custom.bootstrap.css",  
     "source/js/app.js",
-    "source/js/animations.js"
+    "source/js/animations.js",
+    "source/js/ajax_upload.js"
   ],
   "dependencies": {
     "jquery": "1.9.1 - 2",
