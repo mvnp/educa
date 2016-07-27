@@ -1,25 +1,46 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <section class="proposta_wrapper container">
 
-	<div class="page-header">
-		<h1>Proposta</h1>
-	</div>
+	<!-- caixa para recusar a proposta -->
+	<section id="recusar_proposta_box" class="col-xs-12 alert alert-danger hidden">
+		<strong>Você tem certeza que deseja recusar essa proposta?</strong><br><br>
+		<p>Se você recusar essa proposta, ela não será mais listada para você. Você também não poderá voltar atrás após recusa-la</p><br>
+		<a href="<?php echo site_url(); ?>propostas/recusar/<?php echo $proposta->proposta_id; ?>" class="btn btn-danger">
+			Recusar proposta
+		</a>
+		<button type="button" id="voltar_proposta_btn" class="btn btn-info">
+			Voltar
+		</button>
+	</section>
+
+	<!-- caixa para aceitar a proposta -->
+	<section id="aceitar_proposta_box" class="col-xs-12 alert alert-success hidden">
+		<strong>Você tem certeza que deseja aceitar essa proposta?</strong><br><br>
+		<p>Se você recusar essa proposta, ela não será mais listada para você. Você também não poderá voltar atrás após recusa-la</p><br>
+		<a href="<?php echo site_url(); ?>propostas/pagar/<?php echo $proposta->proposta_id; ?>" class="btn btn-success">
+			Aceitar proposta
+		</a>
+		<button type="button" id="voltar_aceitar_btn" class="btn btn-info">
+			Voltar
+		</button>
+	</section>
 
 	<!-- botoes de açoes -->
 	<section class="col-xs-12">
 		
 		<div class="pull-left">
-			<h3>Título da proposta</h3>
+			<h3>
+				<?php echo $professor->username .' em '.$proposta->job_title;?>
+			</h3>
 		</div>
 
 		<div class="pull-right">
 			<br>
-			<button type="button" class="btn btn-success">Aceitar proposta</button>
-			<button type="button" class="btn btn-danger">Recusar proposta</button>
+			<button id="aceitar_proposta_btn" type="button" class="btn btn-success">Aceitar proposta</button>
+			<button id="recusar_proposta_btn" type="button" class="btn btn-danger">Recusar proposta</button>
 		</div>
 
-		<div class="clearfix"></div>
-			
+		<div class="clearfix"></div>			
 	</section>
 
 	<!-- dados da proposta -->
@@ -33,28 +54,50 @@
 			<span class="item">
 				<strong>
 					<span class="glyphicon glyphicon-credit-card"></span> Valor
-				</strong> R$ 23,50
+				</strong> R$ <?php echo number_format($proposta->desc_valor, 2, ',', ' '); ?>
 			</span>
 
 			<span class="item">
 				<strong>
 					<span class="glyphicon glyphicon-user"></span> Professor
-				</strong> Gustavo Vilas Boas
+				</strong> <?php echo (isset($professor->nome)) ? $professor->nome ." ".$professor->sobrenome : $professor->username;?>
 			</span>
 
 			<span class="item">
 				<strong>
 					<span class="glyphicon glyphicon-calendar"></span> Publicada em
-				</strong> 23/11/1996
+				</strong> <?php echo date('m/d/Y',strtotime($proposta->date_pub)); ?>
 			</span>
 
-		</article>
+		</article><!-- informações da proposta -->
+
+		<article class="col-xs-12 bg-info informacoes" style="margin-top: 5px">
+			<span class="title">Informações do pedido</span>
+			
+			<span class="item">
+				<strong>
+					<span class="glyphicon glyphicon-font"></span> Título
+				</strong> <?php echo $proposta->job_title;?>
+			</span>
+
+			<span class="item">
+				<strong>
+					<span class="glyphicon glyphicon-list"></span> Descrição
+				</strong> <?php echo $proposta->job_desc;?>
+			</span>
+
+			<span class="item">
+				<strong>
+					<span class="glyphicon glyphicon-calendar"></span> Publicada em
+				</strong> <?php echo date('m/d/Y',strtotime($proposta->pub_job)); ?>
+			</span>
+
+		</article><!-- informações do pedido -->
 
 		<article class="col-xs-12">
 			<h2>Descrição</h2>
-			<p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
+			<p><?php echo $proposta->desc_descricao; ?></p>
 		</article>
-
 	</section>
 
 	<!-- dados do professor -->
@@ -64,30 +107,46 @@
 			<!-- imagem do professor -->
 			<center>
 				<h3>Professor</h3>
-				<img class="thumbnail" src="<?php echo base_url(); ?>/uploads/default.png" width="100px">
+				<img class="thumbnail" src="<?php echo base_url(); ?>/uploads/<?php echo $professor->foto; ?>" width="100px">
 				
+				<?PHP if(isset($professor->nome) && isset($professor->sobrenome)):?>
 				<span class="block">
-					<strong>Nome de usuário: </strong> @villasboas
+					<strong>Nome: </strong> <?php echo $professor->nome . " " . $professor->sobrenome; ?>
+				</span>
+				<?php endif; ?>
+
+				<span class="block">
+					<strong>Nome de usuário: </strong> <?php echo $professor->username; ?>
 				</span>
 
 				<span class="block">
-					<strong>Membro desde: </strong> 22/22/2222
+					<strong>E-mail: </strong> <?php echo $professor->email; ?>
 				</span>
 
 				<span class="block">
-					<strong>Aulas ministradas</strong> 22
+					<strong>Membro desde: </strong> <?PHP echo date('d/m/Y', $professor->created_on);?>
 				</span>
+
+				<span class="block">
+					<strong>Último login: </strong> <?PHP echo date('H:i d/m/Y', $professor->last_login);?>
+				</span>
+
+				<?PHP if(isset($professor->nome) && isset($professor->sobrenome)):?>
+				<span class="block">
+					<strong>Estado em que reside: </strong> <?php echo $professor->estado; ?>
+				</span>
+				<?php endif; ?>
 
 				<span class="block">
 					<a href="#">ver perfil</a>
 				</span>
 
-				<span class="block">
+				<!--<span class="block">
 					<span class="label label-info">Matemática</span>
 					<span class="label label-info">Matemática</span>
 					<span class="label label-info">Matemática</span>
 					<span class="label label-info">Matemática</span>
-				</span>
+				</span>-->
 
 			</center>
 

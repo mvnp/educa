@@ -17,25 +17,9 @@
         <!-- detalhes do job -->
         <div class="col-md-9">
             
-            <!-- cabecalho do chat -->
-            <header class="col-md-12 chat_header">
-                <strong class="hidden-xs">
-                    <span class="glyphicon glyphicon-comment"></span> Mensagens com
-                </strong> 
-                <a href="#">
-                    Gustavo villas boas
-                </a>
-                
-                <a href="<?php echo site_url(); ?>jobs/proposta/2" class="btn btn-pill btn-pill-warning pull-right">
-                    <small>fazer proposta</small>
-                </a>
-                
-                <div class="clearfix"></div>
-            </header>
-            
             <!-- mensagens do chat -->
-            <div class="col-md-12 chat_messages">
-                <ul>
+            <div class="col-md-12 chat_messages" last-id="">
+                <ul class="chat_messages_content">
                     <li class="bubble received">
                         <span class="chat_author">Gustavo diz:</span>
                         <span class="chat_msg">minha mensagem super top</span>
@@ -65,18 +49,25 @@
             </div>
             
             <!-- formulario de chat -->
-            <form class="col-md-12" method="post">
+            <form id="new_message_form" class="col-md-12" method="post">
                 <h4>Escreva sua mensagem</h4>
-                <textarea class="form-control" rows="5"></textarea>
+                <input type="hidden" value="<?PHP echo $usuario->id; ?>" name="id_para">
+                <textarea name="chat_msg" class="form-control" rows="5"></textarea>
                 <br>
                 <button type="submit" class="btn btn-success btn-lg">Enviar mensagem</button>
-            </form>
-            
+            </form>     
         </div>
         
         <!-- detalhes do cliente -->
         <div class="col-md-3">
-        aaaaaa
+            <center>
+                <strong class="hidden-xs">
+                    <img src="<?PHP echo base_url();?>uploads/<?PHP echo $usuario->foto;?>" width="70px" class="thumbnail">
+                    <span class="glyphicon glyphicon-comment"></span> Mensagens com
+                    <a href="#"> <?php echo $usuario->username; ?> </a><br>
+                    Ultimo login: <?PHP echo date('H:i d/m/Y', $usuario->last_login); ?>
+                </strong>
+            </center>
         </div>
         
     </div>

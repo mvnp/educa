@@ -31,12 +31,6 @@
                 </div>
                 <div class="col-md-6">
                     <strong>
-                        <span class="glyphicon glyphicon-calendar"></span>&nbsp;
-                        Vencimento
-                    </strong>17/11/1996
-                </div>
-                <div class="col-md-6">
-                    <strong>
                         <span class="glyphicon glyphicon-comment"></span>&nbsp;
                         Interessados: 
                     </strong> 5

@@ -63,7 +63,7 @@
                     </span>
                     <span class="job_data_span">
                         <span class="hidden-xs">publicado em: </span>
-                        <strong><?php echo $job->date_pub; ?>7</strong>
+                        <strong><?php echo $job->date_pub; ?></strong>
                     </span>
                     <span class="job_data_span">
                         <span class="hidden-xs">propostas: </span>

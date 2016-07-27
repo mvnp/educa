@@ -86,8 +86,101 @@ class Ajax extends MY_Controller {
             $this->auth->update($this->__user->id, $dados);
 
             echo $data['orig_name'];
-        } 
-      
+        }  
     }
 
-}
+    //faz a exclusao de propostas
+    public function excluir_proposta() {
+
+        //array de retorno
+        $retorno = array();
+
+        //verifica se a requisição é ajax
+        if(!$this->input->is_ajax_request())
+            return false;
+
+        //pega o id passado pelo post
+        $proposta_id = $this->input->post('proposta_id');
+
+        //valida o id
+        if(!$proposta_id || !is_numeric($proposta_id))
+            return false;
+
+        //carrega a model de proposta
+        $this->load->model('propostas_model');
+
+        //pega os dados da proposta pelo id
+        $proposta = $this->propostas_model->get($proposta_id);
+
+        //verifica se a busca retornou resultados
+        if(!$proposta){
+            $retorno['msg']    = "Essa proposta já foi aceita pelo usuário";
+            $retorno['status'] = "error";
+            echo json_encode($retorno);
+            return false;
+        }
+
+        //verifica se a proposta foi feita pelo usuário logado
+        if($proposta->user_id != $this->__user->id) {
+            $retorno['msg']    = 'Você não tem permissão para excluir essa proposta';
+            $retorno['status'] = 'error';
+            echo json_encode($retorno);
+            return false;
+        }
+
+        //deleta a prospota
+        $excluir = $this->propostas_model->excluir($proposta_id);
+
+        //verifica se a exclusao aconteceu com sucesso
+        if($excluir) {
+            $retorno['msg']    = "A proposta foi excluida com sucesso!";
+            $retorno['status'] = "success";
+        }
+
+        //formata o json de retorno
+        echo json_encode($retorno);
+    }
+
+
+    //adiciona conversa no chat
+    public function chat_add_msg(){
+
+        //carrega a model do chat
+        $this->load->model('chat_model');
+
+        //pega os dados da conversa
+        $id_para = $this->input->post('id_para');
+        $msg     = $this->input->post('chat_msg');
+        $time    = time();
+
+        //monta os dados para inserir
+        $dados =  array();
+        $dados['id_de']    = $this->__user->id;
+        $dados['id_para']  = $id_para;
+        $dados['desc_msg'] = $msg;
+
+        //tenta inserir os dados na tabela
+        $teste = $this->chat_model->add_message($dados);  
+
+        //se nao conseguir, retorna falso
+        if(!$teste)
+            return false;
+
+        //monta o html de retorno
+        $html = '<li class="bubble send">
+                    <span class="chat_author">'.$this->__user->username.' diz:</span>
+                    <span class="chat_msg">'.$msg.'</span>
+                    <span class="chat_date">'.date('H:i', $time).' em '.date('d/m/Y', $time).'</span>
+                </li>';
+
+        //manda o html como json        
+        $resposta['html'] = $html;
+        echo json_encode($resposta);        
+
+    }
+
+    //pega msg do chat
+    public function chat_add_msg() {
+        
+    }
+}   

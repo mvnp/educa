@@ -69,6 +69,8 @@
 }
 .tab_container {
     max-width: 800px;
+    padding-bottom: 50px;
+    display: table;
 }
 
 /*__ propostas __*/

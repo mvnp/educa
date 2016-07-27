@@ -35,12 +35,6 @@
                 </div>
                 <div class="col-md-6">
                     <strong>
-                        <span class="glyphicon glyphicon-calendar"></span>&nbsp;
-                        Vencimento
-                    </strong>17/11/1996
-                </div>
-                <div class="col-md-6">
-                    <strong>
                         <span class="glyphicon glyphicon-comment"></span>&nbsp;
                         Interessados: 
                     </strong> 5
@@ -63,7 +57,7 @@
             <!-- botoes de ação -->
             <div class="col-md-12">
                 <a href="<?php echo site_url(); ?>jobs/proposta/<?php echo $job->job_id; ?>" class="btn btn-success btn-lg">Fazer uma proposta</a>
-                <a href="<?php echo site_url(); ?>jobs/chat/4" class="btn btn-info pull-right">Fazer uma pergunta</a>
+                <a href="<?php echo site_url(); ?>jobs/chat/<?PHP echo $job->user_id; ?>" class="btn btn-info pull-right">Fazer uma pergunta</a>
             </div>
             
         </div>

@@ -18,6 +18,9 @@
     float: none; 
     margin: 0px auto;
 }
+.no_list{
+    list-style: none;
+}
 .text-center {
     text-align: center;
 }

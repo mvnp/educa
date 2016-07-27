@@ -124,16 +124,49 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
+            <!-- home -->
             <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                <a href="<?php echo site_url()?>admin">
+                <span class="glyphicon glyphicon-home"></span>&nbsp; Inicio</a>
             </li>
+            
             <!--categorias -->
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo">
+                <a href="javascript:;" data-toggle="collapse" data-target="#sistema">
+                    <span class="glyphicon glyphicon-scale"></span>&nbsp;
+                    Sistema <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="sistema" class="collapse">
+                    <li>
+                        <a href="<?php echo site_url();?>admin_categorias">
+                            Logs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Usuários
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Estatísticas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Informações
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--categorias -->
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#categorias">
                     <span class="glyphicon glyphicon-education"></span>
                     Categorias <i class="fa fa-fw fa-caret-down"></i>
                 </a>
-                <ul id="demo" class="collapse">
+                <ul id="categorias" class="collapse">
                     <li>
                         <a href="<?php echo site_url();?>admin_categorias">
                             <span class="glyphicon glyphicon-list"></span>
@@ -148,6 +181,94 @@
                     </li>
                 </ul>
             </li>
+
+            <!--pagamentos -->
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#pagamentos">
+                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;
+                    Pagamentos <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="pagamentos" class="collapse">
+                    <li>
+                        <a href="<?php echo site_url();?>admin_categorias">
+                            <span class="glyphicon glyphicon-list"></span>&nbsp;
+                            Pagamentos recebidos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            <span class="glyphicon glyphicon-list"></span>&nbsp;
+                            Pagamentos realizados
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--propostas -->
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#propostas">
+                    <span class="glyphicon glyphicon-ok"></span>&nbsp;
+                    Propostas <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="propostas" class="collapse">
+                    <li>
+                        <a href="<?php echo site_url();?>admin_propostas">
+                            Ver todas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_propostas/denuncias">
+                            Denunciadas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--pedidos -->
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#pedidos">
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;
+                    Pedidos <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="pedidos" class="collapse">
+                    <li>
+                        <a href="<?php echo site_url();?>admin_pedidos/listar">
+                            Ver todos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Denunciados
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!--configurações -->
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#settings">
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;
+                    Configurações <i class="fa fa-fw fa-caret-down"></i>
+                </a>
+                <ul id="settings" class="collapse">
+                    <li>
+                        <a href="<?php echo site_url();?>admin_categorias">
+                            Confiruações do site
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Configurações de pagamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url();?>admin_subcategorias">
+                            Configurações da landing page
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
     </div>
     <!-- /.navbar-collapse -->

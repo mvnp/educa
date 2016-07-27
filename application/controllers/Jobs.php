@@ -200,9 +200,14 @@ class Jobs extends MY_Controller{
             redirect(site_url()."/jobs");
             return false;
         }
-        
+
+        //pega o usuario com quem se deseja conversar
+        $usuario = $this->auth->user($id);
+        $usuario = $usuario->row();
+
         //carrega o template
-        $vars['view']     = "jobs/chat";
+        $vars['view']    = "jobs/chat";
+        $vars['usuario'] = $usuario;
         $this->template->set_title('Chat');;
         $this->template->set_vars($vars);
         $this->template->create_page();
